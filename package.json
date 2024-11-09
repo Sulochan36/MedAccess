@@ -1,0 +1,13 @@
+{
+  "name": "medaccess",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "npm run server & npm run client",
+    "server": "npm --prefix server start",
+    "client": "npm --prefix client start",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
