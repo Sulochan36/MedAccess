@@ -4,7 +4,7 @@
 1. **Clone the Repository**  
    - Open the terminal and run:
      ```bash
-     git clone https://github.com/your-repo-url.git
+     git clone https://github.com/Sulochan36/MedAccess.git
      ```
    - This will create a local copy of the main branch on your machine.
 
