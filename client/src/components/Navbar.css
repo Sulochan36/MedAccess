@@ -1,0 +1,64 @@
+/* Navbar.css */
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #0F2167; /* Navbar background color */
+    padding: 1rem 2rem;
+    font-family: 'Inter', sans-serif; /* Font family */
+    color: white; /* Default font color */
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  nav a:hover {
+    color: #ffd700; /* Gold hover effect */
+  }
+  
+  nav div {
+    display: flex;
+    align-items: center;
+  }
+  
+  button {
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: 0.5rem 1rem;
+    margin-left: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: white;
+    color: #0F2167;
+  }
+  
+  @media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      padding: 1rem;
+    }
+  
+    nav div {
+      margin-bottom: 1rem;
+    }
+  
+    nav a {
+      margin: 0.5rem 0;
+    }
+  
+    button {
+      margin: 0.5rem 0;
+    }
+  }
