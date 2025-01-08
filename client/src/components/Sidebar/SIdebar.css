@@ -1,0 +1,98 @@
+/* Sidebar.css */
+
+/* Sidebar container */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #F5F6FA;
+    position: relative;
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    color: white;
+    transition: width 0.3s ease;
+    overflow-x: hidden;
+    z-index: 1000;
+}
+
+/* Sidebar links */
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    color: #5A607F;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.sidebar-link:hover {
+    background-color: #1E5EFF;
+    color: white;
+    
+}
+
+/* Sidebar title */
+.sidebar-title {
+    text-align: center;
+    color: #5A607F;
+    margin-bottom: 40px;
+}
+
+.sidebar-icon {
+    margin-right: 10px;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+/* Hamburger menu button (visible on mobile) */
+.toggle-button {
+    display: none;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 10px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1100;
+}
+
+/* Mobile responsiveness: show sidebar when toggled */
+.sidebar.open {
+    width: 70%;
+}
+
+@media (max-width: 768px) {
+
+    /* Hide the sidebar on mobile by default */
+    .sidebar {
+        width: 0;
+        padding: 0;
+    }
+
+    /* Show the toggle button on small screens */
+    .toggle-button {
+        display: block;
+    }
+
+    /* Content margin when sidebar is open */
+    .sidebar.open {
+        width: 70%;
+        /* Adjust width for mobile */
+    }
+}
+
+/* Make content shift to the right when sidebar is open on smaller screens */
+@media (max-width: 768px) {
+    body {
+        margin-left: 0;
+        transition: margin-left 0.3s ease;
+    }
+
+    .sidebar.open+.main-content {
+        margin-left: 70%;
+    }
+}

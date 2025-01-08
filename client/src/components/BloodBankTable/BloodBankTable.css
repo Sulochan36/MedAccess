@@ -1,0 +1,27 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    list-style: none;
+}
+
+.page {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.previous,
+.next {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.disabled {
+    color: gray;
+    cursor: not-allowed;
+}

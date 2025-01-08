@@ -1,60 +1,106 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+/* Container for the login page */
+.login-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 1px 6px 9px rgba(0, 0, 0, 0.7);
+    background-color: #fff;
+}
+
+/* Title of the page */
+.login-title {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--p-color);
+}
+
+/* Style for the form */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* Style for all input fields */
+.input-field {
+    padding: 15px;
+    margin: 20px 0px 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Focused state for input fields */
+.input-field:focus {
+    border-color: #007bff;
+    border-width: 2px;
+    outline: none;
+}
+
+/* Style for the submit button */
+.submit-button {
+    padding: 12px;
+    margin-top: 20px;
+    font-size: 20px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hover state for submit button */
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+/* Disabled state for the button */
+.submit-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Container for the user type radio buttons */
+.user-type-selection {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 30px 20px 30px;
+}
+
+.login-instruction{
+    color: #949494;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    font-size: medium;
+    
 }
 
-.login-container {
-    background-color: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    text-align: center;
+/* Style for the labels of the radio buttons */
+.user-type-label {
+    font-size: 20px;
+    color: #333;
+    display: flex;
+    
 }
 
-h2 {
-    margin-bottom: 20px;
+/* Style for the radio buttons */
+.user-type-radio {
+    margin-right: 5px;
+    
 }
 
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-.login-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #1e06d7;
-    border: none;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.login-button:hover {
-    background-color: #3a24ed;
-}
-
-.register-section {
-    margin-top: 20px;
-}
-
-.register-section a {
-    text-decoration: none;
-    color: #1e06d7;
-}
-
-.register-section a:hover {
-    text-decoration: underline;
+.seperateline{
+    width:80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    color: rgb(187, 36, 36);
 }

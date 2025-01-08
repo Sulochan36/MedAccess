@@ -1,40 +1,33 @@
 import express from 'express';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import User from '../models/User.js';
+import multer from 'multer';
+import path from 'path';
+import { validateLogin, validateRegistration } from '../middleware/validate.js';
+import { getUserProfile, login, registerDoctor, registerHospital } from '../controllers/authController.js';
+import authMiddleware from '../middleware/authMiddleware.js';
+
+
+// Multer configuration for file uploads
+const storage = (folder) => multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, `./uploads/profiles/${folder}`);  // Store images in the profiles folder
+    },
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+    }
+});
+
+const uploadDoctor = multer({ storage: storage('doctors') }).single('profilePhoto');
+const uploadHospital = multer({ storage: storage('hospitals') }).single('profilePhoto');
+
+
 
 const router = express.Router();
 
-// Register
-router.post('/register', async (req, res) => {
-    const { name, email, password, role } = req.body;
-    try {
-        const existingUser = await User.findOne({ email });
-        if (existingUser) return res.status(400).json({ message: 'User already exists' });
+router.post("/hospital/register", uploadHospital,validateRegistration, registerHospital);
+router.post("/doctor/register", uploadDoctor, validateRegistration, registerDoctor);
+router.post("/login", validateLogin, login);
 
-        const newUser = new User({ name, email, password, role });
-        await newUser.save();
-        res.status(201).json({ message: 'User registered successfully' });
-    } catch (error) {
-        res.status(500).json({ message: 'Something went wrong' });
-    }
-});
-
-// Login
-router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const user = await User.findOne({ email });
-        if (!user) return res.status(404).json({ message: 'User not found' });
-
-        const isPasswordCorrect = await bcrypt.compare(password, user.password);
-        if (!isPasswordCorrect) return res.status(400).json({ message: 'Invalid credentials' });
-
-        const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        res.status(200).json({ user, token });
-    } catch (error) {
-        res.status(500).json({ message: 'Something went wrong' });
-    }
-});
+router.get("/profile", authMiddleware, getUserProfile);
 
 export default router;

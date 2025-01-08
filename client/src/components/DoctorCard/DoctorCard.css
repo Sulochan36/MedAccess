@@ -1,0 +1,102 @@
+/* General styling for the card */
+.doctor-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 16px;
+    /* More rounded corners */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    /* Larger shadow for depth */
+    background: linear-gradient(145deg, #ffffff, #f4f7fa);
+    /* Soft gradient background */
+    padding: 20px;
+    width: 320px;
+    /* Slightly wider */
+    height: 450px;
+    /* Taller for better content layout */
+    margin: 20px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Smooth hover effect */
+}
+
+.doctor-card:hover {
+    transform: translateY(-5px);
+    /* Lift effect on hover */
+    box-shadow: 0 40px 50px rgba(0, 0, 0, 0.493);
+    /* More pronounced shadow on hover */
+}
+
+/* Styling for the doctor image */
+.doctor-image {
+    width: 100%;
+    height: 180px;
+    /* Adjusted to provide more space */
+    object-fit: cover;
+    border-radius: 12px;
+    /* Softer corner radius */
+    margin-bottom: 15px;
+    /* Adds space below the image */
+}
+
+/* Styling for the doctor info section */
+.doctor-info {
+    flex-grow: 1;
+    margin-bottom: 20px;
+    /* Added extra spacing for content */
+    text-align: center;
+}
+
+.doctor-info h3 {
+    font-size: 1.25rem;
+    color: #333;
+    margin: 0;
+    font-weight: 600;
+    /* Increased font weight for prominence */
+}
+
+.doctor-info p {
+    font-size: 0.9rem;
+    color: #777;
+    line-height: 1.4;
+    margin: 10px 0;
+}
+
+/* Styling for the button */
+.appointment-btn {
+    align-self: center;
+    padding: 12px 24px;
+    font-size: 16px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    /* Pill-shaped button */
+    cursor: pointer;
+    text-transform: uppercase;
+    /* All caps for button text */
+    letter-spacing: 1px;
+    /* Slight letter spacing */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* Smooth transition */
+}
+
+.appointment-btn:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+    /* Slight lift effect */
+}
+
+.appointment-btn:active {
+    transform: translateY(1px);
+    /* Button presses down */
+}
+
+/* Optional: Styling for any additional details like specialties */
+.doctor-specialty {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 8px;
+    font-weight: 500;
+    text-transform: capitalize;
+}

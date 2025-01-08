@@ -1,8 +1,8 @@
 /* Carousel Styles */
 .carousel-container {
   position: relative;
-  width: 1500px; /* Reduced width */
-  height: 300px; /* Reduced height */
+  width: 100%; /* Reduced width */
+  height: 100%; /* Reduced height */
   margin: auto;
   overflow: hidden;
   background-color: #f0f0f0;
@@ -11,7 +11,7 @@
 
 .carousel-slide {
   width: 100%;
-  height: 100%;
+  height: fit-content;
   display: flex;
   align-items: center;
   position: relative;
@@ -37,6 +37,7 @@
 
 /* Hide arrows by default */
 .carousel-button {
+  width: auto;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -119,7 +120,7 @@
 /* FOr Doctors-New Container Section  */
 .new-container {
   position: relative;
-  width: 1200px;
+  width: 85%;
   height: 700px;
   margin: 50px auto;
   background: linear-gradient(to bottom right, #0F2167 50%, white 50%);
@@ -142,6 +143,7 @@
 }
 
 .register-button {
+  width: auto;
   margin-top: 20px;
   padding: 10px 20px;
   font-size: 1rem;
@@ -158,7 +160,7 @@
 
 .new-container-image {
   margin-top: 40px;
-  width: 700px;
+  width: auto;
   height: 300px;
   object-fit: cover;
   border-radius: 10px;

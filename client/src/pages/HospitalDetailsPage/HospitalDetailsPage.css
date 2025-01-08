@@ -1,0 +1,62 @@
+/* General styling for the hospital details page */
+.hospital-details {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.hospital-details__name {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+}
+
+.hospital-details__profile {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.hospital-details__info {
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.hospital-details__info p {
+    margin: 10px 0;
+}
+
+.hospital-details__info strong {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.hospital-details__info a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+.hospital-details__info a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .hospital-details {
+        padding: 15px;
+    }
+
+    .hospital-details__name {
+        font-size: 1.5rem;
+    }
+
+    .hospital-details__profile {
+        height: 200px;
+    }
+}

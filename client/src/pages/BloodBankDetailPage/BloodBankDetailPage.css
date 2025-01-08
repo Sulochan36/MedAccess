@@ -1,0 +1,72 @@
+/* BloodBankDetailPage.css */
+
+/* General Page Styling */
+.blood-bank-detail-page {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.page-title {
+    text-align: center;
+    margin-top: 30px;
+    color: #333;
+    font-size: 1.8rem;
+}
+
+/* Container for the hospital list */
+.hospital-list-container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Table Styling */
+.hospital-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table-header {
+    padding: 12px;
+    text-align: left;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+}
+
+.table-row:nth-child(even) {
+    background-color: #e9ecef;
+}
+
+.table-cell {
+    padding: 12px;
+    text-align: left;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.table-row:hover {
+    background-color: #f1f1f1;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+
+    .table-header,
+    .table-cell {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .page-title {
+        font-size: 1.5rem;
+    }
+}

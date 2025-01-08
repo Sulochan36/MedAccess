@@ -1,0 +1,7 @@
+.hospitals-page {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 16px;
+    padding: 24px;
+}

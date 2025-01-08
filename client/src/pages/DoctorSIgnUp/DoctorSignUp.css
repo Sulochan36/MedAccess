@@ -1,0 +1,157 @@
+.doctor-signup-form {
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-title {
+    text-align: center;
+    font-size: 30px;
+    color: #343a40;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    font-size: 16px;
+    color: #495057;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border-color: #28a745;
+    outline: none;
+}
+
+.form-textarea {
+    height: 150px;
+    resize: none;
+}
+
+.error {
+    color: #dc3545;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.submit-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 16px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 600;
+    width: 100%;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+}
+
+.submit-btn:disabled {
+    background-color: #d6d6d6;
+    cursor: not-allowed;
+}
+
+.form-group input[type="file"] {
+    padding: 8px;
+    border: 1px solid #ced4da;
+    background-color: #f8f9fa;
+}
+
+@media (max-width: 768px) {
+    .doctor-signup-form {
+        margin: 20px;
+        padding: 25px;
+    }
+
+    .form-title {
+        font-size: 26px;
+    }
+
+    .form-input,
+    .form-textarea {
+        font-size: 15px;
+    }
+
+    .submit-btn {
+        font-size: 18px;
+    }
+
+    .form-label {
+        font-size: 16px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-input,
+    .form-textarea,
+    .submit-btn {
+        padding: 12px;
+    }
+
+    .form-group input[type="file"] {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .doctor-signup-form {
+        margin: 10px;
+        padding: 15px;
+    }
+
+    .form-title {
+        font-size: 22px;
+    }
+
+    .form-input,
+    .form-textarea {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .submit-btn {
+        font-size: 16px;
+        padding: 14px 0;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-label {
+        font-size: 14px;
+    }
+}

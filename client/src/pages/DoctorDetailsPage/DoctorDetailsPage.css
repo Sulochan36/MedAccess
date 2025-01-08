@@ -1,0 +1,20 @@
+/* DoctorDetailsPage.css */
+.doctor-details-page {
+    padding: 20px;
+}
+
+.doctor-profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.doctor-details {
+    margin-top: 20px;
+}
+
+.doctor-details p {
+    font-size: 18px;
+    margin: 10px 0;
+}
