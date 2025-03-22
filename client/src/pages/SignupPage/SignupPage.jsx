@@ -1,27 +1,51 @@
-import React from 'react'
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import './SignupPage.css'
-import Carousel from '../../components/Carousal/Carousal';
+import { Hospital, UserCog } from 'lucide-react'; // Import icons
+import './SignupPage.css';
 
 const SignupPage = () => {
   const navigate = useNavigate();
 
-
   const handleButtonHospital = () => {
-    navigate('/signup/hospitalsignup');  // Navigate to the /form route
+    navigate('/signup/hospitalsignup');
   };
 
   const handleButtonDoctor = () => {
-    navigate('/signup/doctorsignup');  // Navigate to the /form route
+    navigate('/signup/doctorsignup');
   };
 
   return (
-    <div className='signuppage'>
-      
-      <button className='btn hospitalsignup' onClick={handleButtonHospital} >Hospital Adminisration</button>
-      <button className='btn doctorsignup' onClick={handleButtonDoctor} >Individually as a Doctor</button>
-    </div>
-  )
-}
+    <div className="signup-container">
+      <div className="signup-content">
+        <h1 className="signup-title">Choose Your Account Type</h1>
+        <p className="signup-subtitle">Select the option that best describes your role</p>
 
-export default SignupPage
+        <div className="signup-options">
+          <button
+            className="signup-card hospital"
+            onClick={handleButtonHospital}
+          >
+            <div className="card-icon">
+              <Hospital size={48} />
+            </div>
+            <h2>Hospital Administration</h2>
+            <p>Register your healthcare facility and manage institutional services</p>
+          </button>
+
+          <button
+            className="signup-card doctor"
+            onClick={handleButtonDoctor}
+          >
+            <div className="card-icon">
+              <UserCog size={48} />
+            </div>
+            <h2>Medical Professional</h2>
+            <p>Sign up as an individual healthcare provider</p>
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SignupPage;

@@ -1,72 +1,213 @@
-/* BloodBankDetailPage.css */
+/* Base styles and variables */
+:root {
+    --primary-color: #dc2626;
+    --primary-light: #fecaca;
+    --text-primary: #1f2937;
+    --text-secondary: #4b5563;
+    --background-light: #f8fafc;
+    --card-background: #ffffff;
+    --success-color: #15803d;
+    --warning-color: #ca8a04;
+    --danger-color: #dc2626;
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+}
 
-/* General Page Styling */
+/* Page Layout */
 .blood-bank-detail-page {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+    min-height: 100vh;
+    background-color: var(--background-light);
+    padding: 2rem;
+}
+
+/* Header Styling */
+.blood-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.blood-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--primary-color);
 }
 
 .page-title {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Summary Cards */
+.availability-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    background-color: var(--card-background);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     text-align: center;
-    margin-top: 30px;
-    color: #333;
-    font-size: 1.8rem;
 }
 
-/* Container for the hospital list */
-.hospital-list-container {
-    max-width: 90%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Table Styling */
-.hospital-list-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-.table-header {
-    padding: 12px;
-    text-align: left;
+.summary-card h3 {
+    color: var(--text-secondary);
     font-size: 1rem;
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
+    margin-bottom: 0.5rem;
 }
 
-.table-row:nth-child(even) {
-    background-color: #e9ecef;
+.summary-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
-.table-cell {
-    padding: 12px;
-    text-align: left;
-    font-size: 1rem;
-    background-color: #f9f9f9;
-    color: #333;
+/* Blood Bank Cards Grid */
+.blood-banks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
 }
 
-.table-row:hover {
-    background-color: #f1f1f1;
+.blood-bank-card {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    transition: var(--transition);
 }
 
-/* Responsive Styling */
+.blood-bank-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+.card-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h3 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.availability-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.availability-badge.high {
+    background-color: #dcfce7;
+    color: var(--success-color);
+}
+
+.availability-badge.medium {
+    background-color: #fef9c3;
+    color: var(--warning-color);
+}
+
+.availability-badge.low {
+    background-color: #fee2e2;
+    color: var(--danger-color);
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.info-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.info-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+}
+
+.info-row p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* Loading State */
+.loading-state {
+    text-align: center;
+    padding: 4rem;
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+}
+
+/* No Data State */
+.no-data {
+    text-align: center;
+    padding: 4rem;
+    color: var(--text-secondary);
+}
+
+.no-data svg {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.no-data p {
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
-
-    .table-header,
-    .table-cell {
-        font-size: 0.9rem;
-        padding: 8px;
+    .blood-bank-detail-page {
+        padding: 1rem;
     }
 
     .page-title {
-        font-size: 1.5rem;
+        font-size: 2rem;
+    }
+
+    .blood-banks-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 1.75rem;
+    }
+
+    .summary-card {
+        padding: 1rem;
+    }
+
+    .blood-bank-card {
+        margin: 0 -0.5rem;
     }
 }

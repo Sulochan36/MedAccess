@@ -1,157 +1,377 @@
+.signup-container {
+    min-height: 100vh;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f5f7fa 0%, #d4e6ff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .doctor-signup-form {
     width: 100%;
-    max-width: 800px;
-    margin: auto;
-    padding: 40px;
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-    box-sizing: border-box;
+    max-width: 900px;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.doctor-signup-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(to right, #1a237e, #3949ab);
 }
 
 .form-title {
     text-align: center;
-    font-size: 30px;
-    color: #343a40;
-    font-weight: 600;
-    margin-bottom: 25px;
+    color: #1a237e;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+/* Form Progress Steps */
+.form-progress {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    position: relative;
+    padding: 0 1rem;
+}
+
+.form-progress::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e0e0e0;
+    z-index: 1;
+}
+
+.progress-step {
+    position: relative;
+    z-index: 2;
+    background: white;
+    padding: 0 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.progress-step:hover {
+    transform: translateY(-2px);
+}
+
+.step-number {
+    width: 40px;
+    height: 40px;
+    background: #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-weight: bold;
+    margin: 0 auto 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-step.active .step-number {
+    background: #1a237e;
+    color: white;
+    box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.2);
+}
+
+.progress-step.completed .step-number {
+    background: #00cd0a;
+    color: white;
+}
+
+.step-label {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Form Layout */
+.form-step {
+    animation: fadeIn 0.5s ease;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
 }
 
 .form-group {
-    margin-bottom: 25px;
+    position: relative;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
 }
 
 .form-label {
-    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
     font-weight: 600;
-    color: #495057;
-    margin-bottom: 8px;
-    display: block;
+    color: #444;
+    margin-bottom: 0.5rem;
 }
 
 .form-input,
 .form-textarea {
     width: 100%;
-    padding: 14px;
-    border: 1px solid #ced4da;
+    padding: 0.875rem 1rem;
+    border: 2px solid #e0e0e0;
     border-radius: 10px;
-    font-size: 16px;
-    color: #495057;
-    transition: border-color 0.3s ease;
-    box-sizing: border-box;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.form-input:hover,
+.form-textarea:hover {
+    border-color: #c5cae9;
+    background-color: white;
 }
 
 .form-input:focus,
 .form-textarea:focus {
-    border-color: #28a745;
+    border-color: #1a237e;
+    background-color: white;
+    box-shadow: 0 0 0 4px rgba(26, 35, 126, 0.1);
     outline: none;
 }
 
+.form-input::placeholder,
+.form-textarea::placeholder {
+    color: #aaa;
+}
+
 .form-textarea {
-    height: 150px;
-    resize: none;
+    min-height: 120px;
+    resize: vertical;
 }
 
-.error {
-    color: #dc3545;
-    font-size: 15px;
-    margin-bottom: 15px;
-}
-
-.submit-btn {
-    background-color: #28a745;
-    color: white;
-    padding: 16px 0;
-    border: none;
-    border-radius: 10px;
+/* File Upload */
+.file-upload-container {
+    border: 3px dashed #e0e0e0;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+    background: #f8f9fa;
     cursor: pointer;
-    font-size: 20px;
-    font-weight: 600;
+}
+
+.file-upload-container:hover {
+    border-color: #1a237e;
+    background: #f5f7fa;
+}
+
+.upload-icon {
+    color: #1a237e;
+    margin-bottom: 1rem;
+}
+
+.image-preview {
+    margin-top: 1.5rem;
+    border-radius: 12px;
+    overflow: hidden;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.image-preview img {
     width: 100%;
-    transition: background-color 0.3s ease;
-    box-sizing: border-box;
+    height: auto;
+    display: block;
 }
 
-.submit-btn:hover {
-    background-color: #218838;
+/* Error Message */
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #fee2e2;
+    border: 1px solid #ef4444;
+    color: #dc2626;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    animation: slideIn 0.3s ease;
 }
 
-.submit-btn:disabled {
-    background-color: #d6d6d6;
+/* Navigation Buttons */
+.form-navigation {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.prev-btn {
+    background-color: #f3f4f6;
+    color: #4b5563;
+}
+
+.prev-btn:hover {
+    background-color: #e5e7eb;
+    transform: translateX(-2px);
+}
+
+.next-btn {
+    background: linear-gradient(135deg, #1a237e 0%, #3949ab 100%);
+    color: white;
+    flex: 1;
+    max-width: 200px;
+    justify-content: center;
+}
+
+.next-btn:hover {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    transform: translateX(2px);
+}
+
+.next-btn:disabled {
+    background: #9ca3af;
     cursor: not-allowed;
+    transform: none;
 }
 
-.form-group input[type="file"] {
-    padding: 8px;
-    border: 1px solid #ced4da;
-    background-color: #f8f9fa;
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading State */
+.nav-btn:disabled::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
+    .signup-container {
+        padding: 1rem;
+    }
+
     .doctor-signup-form {
-        margin: 20px;
-        padding: 25px;
+        padding: 1.5rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .form-title {
-        font-size: 26px;
+        font-size: 1.5rem;
     }
 
-    .form-input,
-    .form-textarea {
-        font-size: 15px;
+    .step-label {
+        display: none;
     }
 
-    .submit-btn {
-        font-size: 18px;
+    .form-navigation {
+        flex-direction: column;
     }
 
-    .form-label {
-        font-size: 16px;
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    .form-input,
-    .form-textarea,
-    .submit-btn {
-        padding: 12px;
-    }
-
-    .form-group input[type="file"] {
-        padding: 10px;
+    .nav-btn {
+        width: 100%;
+        max-width: none;
     }
 }
 
-@media (max-width: 480px) {
-    .doctor-signup-form {
-        margin: 10px;
-        padding: 15px;
-    }
+/* Validation States */
+.form-input:invalid:not(:placeholder-shown) {
+    border-color: #525252;
+}
 
-    .form-title {
-        font-size: 22px;
-    }
+.form-input:valid:not(:placeholder-shown) {
+    border-color: #1a237e;
+}
 
-    .form-input,
-    .form-textarea {
-        font-size: 14px;
-        padding: 10px;
-    }
+/* Optional Field Indicator */
+.form-label[data-optional]::after {
+    content: " (optional)";
+    color: #9ca3af;
+    font-size: 0.8em;
+    font-weight: normal;
+}
 
-    .submit-btn {
-        font-size: 16px;
-        padding: 14px 0;
-    }
-
-    .form-group {
-        margin-bottom: 15px;
-    }
-
-    .form-label {
-        font-size: 14px;
-    }
+/* Focus Ring for Accessibility */
+.form-input:focus-visible,
+.form-textarea:focus-visible,
+.nav-btn:focus-visible {
+    outline: 2px solid #1a237e;
+    outline-offset: 2px;
 }

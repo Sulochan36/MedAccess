@@ -4,13 +4,13 @@
 
 :root {
     --p-color: #0F2167;
-    --hover-color:#00B8D9;
-    
+    /* --hover-color:#00B8D9;   old style */
+    --hover-color:#AFA2FF;
 }
 
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Lato', serif ;
+    font-family: 'Lato', serif;
 }

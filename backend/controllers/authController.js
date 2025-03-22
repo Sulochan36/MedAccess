@@ -3,6 +3,7 @@ import { generateToken, verifyToken } from "../utils/jwt.js";
 import Hospital from "../models/Hospital.js";
 import Doctor from "../models/Doctor.js";
 import { createBloodBankForHospital } from "../utils/createBloodBankForHospital.js";
+import cloudinary from "../lib/cloudinary.js";
 
 // import multer from 'multer';
 // import path from 'path';
@@ -14,7 +15,7 @@ import { createBloodBankForHospital } from "../utils/createBloodBankForHospital.
 export const registerHospital = async (req, res) => {
     try {
         // Extract form data from the request body
-        const { hospitalName, email, password, contact, address, registrationNumber, about, websiteUrl } = req.body;
+        const { hospitalName, email, password, contact, address, registrationNumber, about, profilePhoto, websiteUrl } = req.body;
 
         // Check if the email is already registered
         const existingHospital = await Hospital.findOne({ email });
@@ -44,15 +45,25 @@ export const registerHospital = async (req, res) => {
             address: parsedAddress,  // Store the parsed address object
             registrationNumber,
             about,
-            profilePhoto: null,  // Default to null initially; will be updated after file upload
+            profilePhoto,  // Default to null initially; will be updated after file upload
             websiteUrl,
         });
 
-        // If a file was uploaded, update the hospital's profilePhoto field
-        if (req.file) {
-            hospital.profilePhoto = `/uploads/profiles/${req.file.filename}`;
-        }
+        if (profilePhoto) {
+            // Remove the "data:image/png;base64," part of the Base64 string
+            const base64Image = profilePhoto.split(',')[1];
 
+            // Upload image to Cloudinary
+            const result = await cloudinary.uploader.upload(`data:image/png;base64,${base64Image}`, {
+                folder: 'hospital_profiles',
+                use_filename: true,
+                unique_filename: false,
+                resource_type: 'image',
+            });
+
+            // Store the Cloudinary image URL in the profilePhoto field
+            hospital.profilePhoto = result.secure_url;
+        }
         // Save the hospital record to the database
         await hospital.save();
 
@@ -70,7 +81,7 @@ export const registerHospital = async (req, res) => {
 export const registerDoctor = async (req, res) => {
     try {
         // Extract form data from the request body
-        const { fullName, email, password, licenseNumber, specialization, experience, daysAvailable, clinicTimings, aboutYourself, websiteUrl, clinicAddress } = req.body;
+        const { fullName, email, password, licenseNumber, specialization, experience, daysAvailable, clinicTimings, aboutYourself, websiteUrl, clinicAddress, profilePhoto } = req.body;
 
         // Check if the email is already registered
         const existingDoctor = await Doctor.findOne({ email });
@@ -102,14 +113,26 @@ export const registerDoctor = async (req, res) => {
             daysAvailable,
             clinicTimings,
             aboutYourself,
-            profilePhoto:null,
+            profilePhoto,
             websiteUrl,
             clinicAddress: parsedclinicAddress,
         });
 
         // If a file was uploaded, update the doctor's profilePhoto field
-        if (req.file) {
-            doctor.profilePhoto = `/uploads/profiles/${req.file.filename}`;
+        if (profilePhoto) {
+            // Remove the "data:image/png;base64," part of the Base64 string
+            const base64Image = profilePhoto.split(',')[1];
+
+            // Upload image to Cloudinary
+            const result = await cloudinary.uploader.upload(`data:image/png;base64,${base64Image}`, {
+                folder: 'doctor_profiles',
+                use_filename: true,
+                unique_filename: false,
+                resource_type: 'image',
+            });
+
+            // Store the Cloudinary image URL in the profilePhoto field
+            doctor.profilePhoto = result.secure_url;
         }
 
         await doctor.save();

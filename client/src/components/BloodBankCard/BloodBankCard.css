@@ -1,66 +1,159 @@
-/* BloodGroupCard.css */
+/* BloodBankCard.css */
 .blood-card {
-    border-radius: 16px;
-    padding: 20px;
+    border-radius: 20px;
+    padding: 2rem;
+    width: 100%;
     max-width: 320px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    margin: 20px;
-    background-color: #fff;
+    background: linear-gradient(145deg, #ffffff, #f5f5f5);
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.1),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.03);
     text-align: center;
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-    
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.blood-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #d32f2f, #ff6b6b);
 }
 
 .blood-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 40px 50px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow:
+        0 20px 30px rgba(0, 0, 0, 0.15),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .blood-group {
-    font-size: 28px;
-    font-weight: bold;
+    font-size: 2.5rem;
+    font-weight: 800;
     color: #d32f2f;
-    margin-bottom: 12px;
-    letter-spacing: 1px;
-    
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(211, 47, 47, 0.1);
+    position: relative;
+    display: inline-block;
 }
 
-.hospital-name,
-.location,
-.available-units,
-.last-updated,
-.contact-info {
-    font-size: 15px;
-    color: #555;
-    margin: 6px 0;
-    line-height: 1.5;
+.blood-group::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #d32f2f, #ff6b6b);
+    border-radius: 2px;
 }
 
-.hospital-name {
-    font-weight: 600;
-    color: #333;
-    
+.available-units {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    margin: 1.2rem 0;
+    padding: 0.8rem;
+    background-color: rgba(211, 47, 47, 0.05);
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.last-updated {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+    font-style: italic;
 }
 
 .request-button {
-    background-color: #1976d2;
+    background: linear-gradient(135deg, #100078, #0e416a);
     color: white;
     border: none;
-    padding: 12px 24px;
-    font-size: 16px;
-    border-radius: 25px;
+    padding: 0.8rem 2rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 50px;
     cursor: pointer;
-    margin-top: 16px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    max-width: 200px;
+    transition: all 0.3s ease;
+    text-transform: capitalize;
+    letter-spacing: 1.5px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(25, 118, 210, 0.2);
+}
+
+.request-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    transition: 0.5s;
 }
 
 .request-button:hover {
-    background-color: #1565c0;
-    transform: translateY(-3px);
+    background: linear-gradient(135deg, #100078, #0055ab);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.3);
+}
+
+.request-button:hover::before {
+    left: 100%;
 }
 
 .request-button:active {
     transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(25, 118, 210, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .blood-card {
+        padding: 1.5rem;
+        max-width: 100%;
+    }
+
+    .blood-group {
+        font-size: 2rem;
+    }
+
+    .available-units {
+        font-size: 1rem;
+        padding: 0.6rem;
+    }
+
+    .request-button {
+        padding: 0.7rem 1.5rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Animation for new cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.blood-card {
+    animation: fadeInUp 0.5s ease-out forwards;
 }

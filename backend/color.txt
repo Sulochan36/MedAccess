@@ -1,0 +1,13 @@
+//when light bg
+
+Cool Gray (#808097) → Slightly bluish-gray for a modern feel.
+Soft Purple (#7E5DC6) → A pastel tone that maintains harmony with #100078.
+Medium Gray (#9999A3) → Subtle but still readable.
+
+
+// when dark bg
+
+Soft Lavender (#AFA2FF) → Light purple for a subtle yet readable contrast.
+Muted Gray (#B8B8C8) → Neutral and professional, ensuring readability without distraction.
+Pastel Lilac (#D1C6FF) → Adds a gentle touch without standing out too much.
+Cool Light Gray (#D6D6E7) → A softer alternative to white, reducing contrast strain.

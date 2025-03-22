@@ -10,6 +10,7 @@ import userRoutes from './routes/userRoutes.js';
 import bloodBankRoutes from './routes/bloodBankRoutes.js';
 import bedsRoutes from './routes/bedsRoutes.js';
 import hdoctorRoutes from './routes/hdoctorRoutes.js';
+import bodyParser from 'body-parser';
 
 dotenv.config();
 const app = express();
@@ -17,11 +18,16 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:5173',  // Allow requests from your frontend (Vite)
+    origin: 'http://localhost:5174',  // Allow requests from your frontend (Vite)
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
  // Enable CORS for cross-origin requests
+
+// server.js
+app.use(bodyParser.json({ limit: '50mb' }));  // Increase the limit even further
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
 
 app.use('/uploads', express.static('uploads'));
 

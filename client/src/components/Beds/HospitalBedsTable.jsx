@@ -46,7 +46,7 @@ const HospitalBedsTable = () => {
 
     return (
         <div>
-            <h2>Hospital Bed Management</h2>
+            {/* <h2>Hospital Bed Management</h2> */}
 
             {beds.length === 0 ? (
                 <p>No bed details available</p>  // Show message if no beds are found

@@ -1,6 +1,34 @@
-/* DoctorDetailsPage.css */
+:root {
+    --primary-color: #2563eb;
+    --primary-light: #dbeafe;
+    --secondary-color: #475569;
+    --text-primary: #1f2937;
+    --text-secondary: #64748b;
+    --background-light: #f8fafc;
+    --card-background: #ffffff;
+    --border-radius: 12px;
+    --transition: all 0.3s ease;
+}
+
 .doctor-details-page {
-    padding: 20px;
+    min-height: 100vh;
+    background-color: var(--background-light);
+    padding: 2rem;
+}
+
+/* Profile Header */
+.doctor-profile-header {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 2rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.profile-image-container {
+    flex-shrink: 0;
 }
 
 .doctor-profile-image {
@@ -8,13 +36,162 @@
     height: 200px;
     border-radius: 50%;
     object-fit: cover;
+    border: 4px solid var(--primary-light);
 }
 
-.doctor-details {
-    margin-top: 20px;
+.profile-header-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
 }
 
-.doctor-details p {
-    font-size: 18px;
-    margin: 10px 0;
+.profile-header-content h1 {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.specialization-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 600;
+}
+
+.experience-badge {
+    display: inline-flex;
+    background-color: #f1f5f9;
+    color: var(--secondary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 500;
+}
+
+/* Details Grid */
+.doctor-details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.info-card {
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.info-card h2 {
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    margin: 0 0 1.5rem 0;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-light);
+}
+
+.info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    gap: 1rem;
+}
+
+.info-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--primary-color);
+    flex-shrink: 0;
+}
+
+.info-content {
+    flex-grow: 1;
+}
+
+.info-content h3 {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0 0 0.5rem 0;
+}
+
+.info-content p {
+    margin: 0;
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+.info-content a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.info-content a:hover {
+    text-decoration: underline;
+}
+
+/* Loading and Error States */
+.loading-state,
+.error-state {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    gap: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .doctor-details-page {
+        padding: 1rem;
+    }
+
+    .doctor-profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .profile-header-content {
+        align-items: center;
+    }
+
+    .doctor-profile-image {
+        width: 150px;
+        height: 150px;
+    }
+
+    .profile-header-content h1 {
+        font-size: 2rem;
+    }
+
+    .doctor-details-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-header-content h1 {
+        font-size: 1.75rem;
+    }
+
+    .info-card {
+        padding: 1.5rem;
+    }
+
+    .specialization-badge,
+    .experience-badge {
+        font-size: 0.875rem;
+    }
 }

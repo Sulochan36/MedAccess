@@ -1,38 +1,188 @@
-.signuppage{
-    width: 100%;
+/* SignupPage.css */
+.signup-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f6f8fb 0%, #f1f4f9 100%);
+    padding: 2rem;
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-    padding: 20px;
+    justify-content: center;
 }
 
-.btn{
+.signup-content {
     width: 100%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.signup-title {
+    font-size: 2.5rem;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.signup-subtitle {
+    font-size: 1.1rem;
+    color: #718096;
+    margin-bottom: 3rem;
+}
+
+.signup-options {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+.signup-card {
+    flex: 1;
+    min-width: 280px;
     max-width: 400px;
-    margin: 20px;
-    font-size: 2em;
-    height: 300px;
-    box-shadow: 10px 8px 10px rgba(0, 0, 0, 0.7);
-    border-radius: 30px;
+    background: white;
+    border-radius: 24px;
+    padding: 2.5rem 2rem;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.signup-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    transform: translateY(100%);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.signup-card:hover {
+    background: #00df3f4e;
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.signup-card:hover::before {
+    transform: translateY(0);
+}
+
+.card-icon {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    padding: 10px;            
+    margin: 0 auto 1.5rem;
+}
+
+.hospital .card-icon {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+}
+
+.doctor .card-icon {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+}
+
+.hospital .card-icon svg {
+    color: #1976d2;
+}
+
+.doctor .card-icon svg {
+    color: #2e7d32;
+}
+
+.signup-card h2 {
+    font-size: 1.5rem;
+    color: #2d3748;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.signup-card p {
+    font-size: 1rem;
+    color: #718096;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+/* Hover effects */
+.signup-card:hover .card-icon {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.signup-card {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .signup-container {
+        padding: 1rem;
+    }
+
+    .signup-title {
+        font-size: 2rem;
+    }
+
+    .signup-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .signup-options {
+        gap: 1rem;
+    }
+
+    .signup-card {
+        padding: 1.5rem 1rem;
+    }
 }
 
 @media (max-width: 480px) {
-    .btn {
-        font-size: 1.1em;
-        height: 120px;
-        width: 100%;
-        /* Full width on very small screens */
+    .signup-title {
+        font-size: 1.75rem;
     }
 
-    .signuppage {
-        gap: 10px;
-        padding: 5px;
+    .signup-card {
+        min-width: 100%;
+        padding: 1.25rem 1rem;
+    }
+
+    .card-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .card-icon svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .signup-card h2 {
+        font-size: 1.25rem;
     }
 }

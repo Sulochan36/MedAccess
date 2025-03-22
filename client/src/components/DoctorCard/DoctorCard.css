@@ -1,102 +1,167 @@
-/* General styling for the card */
 .doctor-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    border-radius: 16px;
-    /* More rounded corners */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    /* Larger shadow for depth */
-    background: linear-gradient(145deg, #ffffff, #f4f7fa);
-    /* Soft gradient background */
-    padding: 20px;
-    width: 320px;
-    /* Slightly wider */
-    height: 450px;
-    /* Taller for better content layout */
-    margin: 20px;
-    overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* Smooth hover effect */
+    position: relative;
 }
 
 .doctor-card:hover {
-    transform: translateY(-5px);
-    /* Lift effect on hover */
-    box-shadow: 0 40px 50px rgba(0, 0, 0, 0.493);
-    /* More pronounced shadow on hover */
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Styling for the doctor image */
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+}
+
 .doctor-image {
     width: 100%;
-    height: 180px;
-    /* Adjusted to provide more space */
+    height: 100%;
     object-fit: cover;
-    border-radius: 12px;
-    /* Softer corner radius */
-    margin-bottom: 15px;
-    /* Adds space below the image */
+    transition: transform 0.5s ease;
 }
 
-/* Styling for the doctor info section */
-.doctor-info {
-    flex-grow: 1;
-    margin-bottom: 20px;
-    /* Added extra spacing for content */
-    text-align: center;
+.doctor-card:hover .doctor-image {
+    transform: scale(1.05);
 }
 
-.doctor-info h3 {
-    font-size: 1.25rem;
-    color: #333;
-    margin: 0;
-    font-weight: 600;
-    /* Increased font weight for prominence */
-}
-
-.doctor-info p {
-    font-size: 0.9rem;
-    color: #777;
-    line-height: 1.4;
-    margin: 10px 0;
-}
-
-/* Styling for the button */
-.appointment-btn {
-    align-self: center;
-    padding: 12px 24px;
-    font-size: 16px;
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    border-radius: 25px;
-    /* Pill-shaped button */
-    cursor: pointer;
-    text-transform: uppercase;
-    /* All caps for button text */
-    letter-spacing: 1px;
-    /* Slight letter spacing */
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    /* Smooth transition */
-}
-
-.appointment-btn:hover {
-    background-color: #218838;
-    transform: translateY(-3px);
-    /* Slight lift effect */
-}
-
-.appointment-btn:active {
-    transform: translateY(1px);
-    /* Button presses down */
-}
-
-/* Optional: Styling for any additional details like specialties */
-.doctor-specialty {
-    font-size: 0.9rem;
-    color: #555;
-    margin-top: 8px;
+.doctor-specialty-badge {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(0, 65, 106, 0.9);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
     font-weight: 500;
-    text-transform: capitalize;
+    backdrop-filter: blur(4px);
+}
+
+.doctor-info {
+    padding: 24px;
+    flex-grow: 1;
+}
+
+.doctor-name {
+    font-size: 1.4rem;
+    color: #1a1a1a;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    line-height: 1.3;
+}
+
+.info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.info-icon {
+    color: #00416A;
+    flex-shrink: 0;
+}
+
+.info-item span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.view-profile-btn {
+    margin: 0 24px 24px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #00416A, #005c9c);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.view-profile-btn:hover {
+    background: linear-gradient(135deg, #003356, #004b7f);
+}
+
+.arrow-icon {
+    transition: transform 0.3s ease;
+}
+
+.view-profile-btn:hover .arrow-icon {
+    transform: translateX(4px);
+}
+
+/* Shimmer effect while image loads */
+.image-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 100%
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .doctor-name {
+        font-size: 1.2rem;
+    }
+
+    .info-item {
+        font-size: 0.9rem;
+    }
+
+    .doctor-specialty-badge {
+        font-size: 0.75rem;
+        padding: 4px 10px;
+    }
+}
+
+/* Ensure text doesn't overflow on small screens */
+@media (max-width: 480px) {
+    .doctor-info {
+        padding: 16px;
+    }
+
+    .view-profile-btn {
+        margin: 0 16px 16px;
+        padding: 10px 20px;
+    }
 }

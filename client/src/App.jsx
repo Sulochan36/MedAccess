@@ -37,6 +37,8 @@ import HospitalDetailsPage from './pages/HospitalDetailsPage/HospitalDetailsPage
 import DoctorDetailsPage from './pages/DoctorDetailsPage/DoctorDetailsPage';
 import PrivateRoute from './components/PrivateRoute.jsx';
 
+import HospitalBedsTable from './components/Beds/HospitalBedsTable.jsx';
+
 
 const App = () => {
 
@@ -49,6 +51,7 @@ const App = () => {
         <Route path="/hospitals" element={<UserLayout><HospitalsPage /></UserLayout>} />
         <Route path="/hospitals/:id" element={<UserLayout><HospitalDetailsPage /></UserLayout>} />
         <Route path="/blood-bank" element={<UserLayout><BloodBankPage /></UserLayout>} />
+        <Route path="/beds" element={<UserLayout><HospitalBedsTable /></UserLayout>} />
         <Route path="/blood-bank/:bloodGroup" element={<UserLayout><BloodBankDetailPage /></UserLayout>} />
         <Route path="/doctors" element={<UserLayout><DoctorsPage /></UserLayout>} />
         <Route path="/doctors/:id" element={<UserLayout><DoctorDetailsPage /></UserLayout>} />
@@ -59,8 +62,9 @@ const App = () => {
         <Route path="/signup/hospitalsignup" element={<UserLayout><HospitalSignUp /></UserLayout>} />
         <Route path="/signup/doctorsignup" element={<UserLayout><DoctorSignUp /></UserLayout>} />
 
-        
-        
+
+
+
 
 
         {/* Private Routes */}
