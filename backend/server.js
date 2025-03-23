@@ -10,6 +10,8 @@ import userRoutes from './routes/userRoutes.js';
 import bloodBankRoutes from './routes/bloodBankRoutes.js';
 import bedsRoutes from './routes/bedsRoutes.js';
 import hdoctorRoutes from './routes/hdoctorRoutes.js';
+import pharmacyRoutes from './routes/pharmacyRoutes.js';
+import nonmedicalstaffRoutes from './routes/NonMedicalStaffRoutes.js';
 import bodyParser from 'body-parser';
 
 dotenv.config();
@@ -42,6 +44,8 @@ app.use('/api/blood-bank', bloodBankRoutes);
 app.use('/api/beds', bedsRoutes);
 app.use('/api/hospitaldoctors', hdoctorRoutes);
 app.use('/api/users', userRoutes);
+app.use("/api/pharmacy", pharmacyRoutes);
+app.use("/api/nonmedicalstaff", nonmedicalstaffRoutes);
 app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 // Port

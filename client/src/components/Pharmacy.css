@@ -1,0 +1,52 @@
+.pharmacy-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.pharmacy-title {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.pharmacy-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.pharmacy-form input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submit-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.pharmacy-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.pharmacy-table th,
+.pharmacy-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

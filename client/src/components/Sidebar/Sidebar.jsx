@@ -23,6 +23,8 @@ const Sidebar = () => {
                 <Link to="/dashboard/bloodbank" className="sidebar-link"><MdBloodtype className="sidebar-icon" />Blood Bank</Link>
                 <Link to="/dashboard/doctors" className="sidebar-link"><FaUserDoctor className="sidebar-icon" />Manage Doctors</Link>
                 <Link to="/dashboard/beds" className="sidebar-link"><FaBed className="sidebar-icon" />Beds</Link>
+                <Link to="/dashboard/pharmacy" className="sidebar-link"><FaBed className="sidebar-icon" />Pharmacy</Link>
+                <Link to="/dashboard/nonmedicalstaff" className="sidebar-link"><FaBed className="sidebar-icon" />Non Medical Staff</Link>
                 <Link to="/inbox" className="sidebar-link"><FaMailBulk className="sidebar-icon" />Inbox</Link>
                 <Link to="/settings" className="sidebar-link"><IoMdSettings className="sidebar-icon" />Settings</Link>
             </div>

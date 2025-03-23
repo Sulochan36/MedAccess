@@ -38,6 +38,8 @@ import DoctorDetailsPage from './pages/DoctorDetailsPage/DoctorDetailsPage';
 import PrivateRoute from './components/PrivateRoute.jsx';
 
 import HospitalBedsTable from './components/Beds/HospitalBedsTable.jsx';
+import Pharmacy from './DashPages/Pharmacy/Pharmacy.jsx';
+import NonMedicalStaff from './DashPages/NonMedicalStaff/NonMedicalStaff.jsx';
 
 
 const App = () => {
@@ -79,8 +81,11 @@ const App = () => {
         <Route path="/dashboard/bloodbank" element={<PrivateRoute><DashLayout><DashBloodBank /></DashLayout></PrivateRoute>} />
         <Route path="/dashboard/doctors" element={<PrivateRoute><DashLayout><DashDoctors /></DashLayout></PrivateRoute>} />
         <Route path="/dashboard/beds" element={<PrivateRoute><DashLayout><Dashbeds /></DashLayout></PrivateRoute>} />
+        <Route path="/dashboard/pharmacy" element={<PrivateRoute><DashLayout><Pharmacy /></DashLayout></PrivateRoute>} />
+        <Route path="/dashboard/nonmedicalstaff" element={<PrivateRoute><DashLayout><NonMedicalStaff /></DashLayout></PrivateRoute>} />
         <Route path="/dashboard/doctors/adddoctorform" element={<PrivateRoute><DashLayout><AddDoctorForm /></DashLayout></PrivateRoute>} />
         <Route path="/dashboard/doctors/bedetailsform" element={<PrivateRoute><DashLayout><BedDetailForm /></DashLayout></PrivateRoute>} />
+        
 
       </Routes>
     </Router>

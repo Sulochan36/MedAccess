@@ -1,0 +1,81 @@
+/* NonMedicalStaff.css */
+
+.non-medical-staff-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.non-medical-staff-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.staff-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.staff-form input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.staff-form button {
+    grid-column: span 2;
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.staff-form button:hover {
+    background-color: #45a049;
+}
+
+.staff-table {
+    margin-top: 30px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.staff-table th,
+.staff-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.staff-table th {
+    background-color: #f2f2f2;
+}
+
+.staff-table button {
+    padding: 6px 12px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.staff-table button:hover {
+    opacity: 0.8;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+    border: none;
+}
+
+.edit-btn {
+    background-color: blue;
+    color: white;
+    border: none;
+}
