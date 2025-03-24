@@ -1,5 +1,5 @@
 
-import { useAuth } from 'react';
+import { useAuth } from './context/authContext.jsx';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import axios from 'axios';
@@ -37,12 +37,18 @@ import HospitalDetailsPage from './pages/HospitalDetailsPage/HospitalDetailsPage
 import DoctorDetailsPage from './pages/DoctorDetailsPage/DoctorDetailsPage';
 import PrivateRoute from './components/PrivateRoute.jsx';
 
-import HospitalBedsTable from './components/Beds/HospitalBedsTable.jsx';
+
 import Pharmacy from './DashPages/Pharmacy/Pharmacy.jsx';
 import NonMedicalStaff from './DashPages/NonMedicalStaff/NonMedicalStaff.jsx';
+import EditProfile from './DashPages/DashProfile/EditProfile.jsx';
+import DoctorDashLayout from './layouts/DoctorDashLayout.jsx';
+import BedsPage from './pages/BedsPage/BedsPage.jsx';
+
 
 
 const App = () => {
+
+  const { userId } = useAuth();
 
   return (
     <Router>
@@ -53,7 +59,7 @@ const App = () => {
         <Route path="/hospitals" element={<UserLayout><HospitalsPage /></UserLayout>} />
         <Route path="/hospitals/:id" element={<UserLayout><HospitalDetailsPage /></UserLayout>} />
         <Route path="/blood-bank" element={<UserLayout><BloodBankPage /></UserLayout>} />
-        <Route path="/beds" element={<UserLayout><HospitalBedsTable /></UserLayout>} />
+        <Route path="/beds" element={<UserLayout><BedsPage /></UserLayout>} />
         <Route path="/blood-bank/:bloodGroup" element={<UserLayout><BloodBankDetailPage /></UserLayout>} />
         <Route path="/doctors" element={<UserLayout><DoctorsPage /></UserLayout>} />
         <Route path="/doctors/:id" element={<UserLayout><DoctorDetailsPage /></UserLayout>} />
@@ -72,12 +78,13 @@ const App = () => {
         {/* Private Routes */}
         <Route
           path="/profile"
-          element={<ProfilePage />}
+          element={<DoctorDashLayout><ProfilePage /></DoctorDashLayout>}
         />
 
 
         {/* Dash routes */}
         <Route path="/dashboard" element={<PrivateRoute><DashLayout><Dashboard /></DashLayout></PrivateRoute>} />
+        <Route path="/dashboard/editprofile" element={<PrivateRoute><DashLayout><EditProfile  /></DashLayout></PrivateRoute>} />
         <Route path="/dashboard/bloodbank" element={<PrivateRoute><DashLayout><DashBloodBank /></DashLayout></PrivateRoute>} />
         <Route path="/dashboard/doctors" element={<PrivateRoute><DashLayout><DashDoctors /></DashLayout></PrivateRoute>} />
         <Route path="/dashboard/beds" element={<PrivateRoute><DashLayout><Dashbeds /></DashLayout></PrivateRoute>} />

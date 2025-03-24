@@ -14,7 +14,7 @@ const HospitalSignUp = () => {
         zipCode: '',
         registrationNumber: '',
         state: '',
-        departmentalServices: '',
+        about: '',
         profilePhoto: null,
         websiteUrl: '',
     });
@@ -90,7 +90,7 @@ const HospitalSignUp = () => {
             contact: formData.contact,
             address: JSON.stringify(address),
             registrationNumber: formData.registrationNumber,
-            departmentalServices: formData.departmentalServices,
+            about: formData.about,
             websiteUrl: formData.websiteUrl,
             profilePhoto: formData.profilePhoto,  // Send Base64 encoded image here
         };
@@ -305,14 +305,33 @@ const HospitalSignUp = () => {
                         </div>
 
                         <div className="form-group full-width">
-                            <label htmlFor="departmentalServices" className="form-label">
-                                Departmental Services & Facilities
+                            <label htmlFor="about" className="form-label">
+                                About the Hospital (Please provide detailed information for the following sections):
+                                <br />
+                                - **About the Hospital**: Describe your hospital briefly, its mission, vision, and core values.
+                                <br />
+                                - **Center of Excellence**: List any specialized centers of excellence (e.g., Heart Care, Cancer Center).
+                                <br />
+                                - **Other Specialties**: List any additional specialties or services your hospital offers.
+                                <br />
+                                - **Admission Process**: Explain the steps for patient admission, including paperwork and insurance.
+                                <br />
+                                - **Discharge Process**: Provide information about the discharge procedure for patients.
+                                <br />
+                                - **Guidelines for Visitors**: List visitor rules and guidelines, including visiting hours.
+                                <br />
+                                - **Patient Attendant Responsibilities**: Describe the duties and responsibilities of patient attendants.
+                                <br />
+                                - **Facilities**: List and describe the hospital’s key facilities, such as emergency services and diagnostic equipment.
+                                <br />
+                                - **Visiting Hours**: Provide your hospital's visiting hours and any specific department restrictions.
+                                
                             </label>
                             <textarea
-                                id="departmentalServices"
-                                name="departmentalServices"
+                                id="about"
+                                name="about"
                                 className="form-textarea"
-                                value={formData.departmentalServices}
+                                value={formData.about}
                                 onChange={handleChange}
                                 required
                                 placeholder="List your departments and facilities"

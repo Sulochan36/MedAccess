@@ -76,3 +76,61 @@ export const deleteBed = async (req, res) => {
         res.status(500).json({ message: 'Error deleting bed details', error: err.message });
     }
 };
+
+
+
+export const getBedsByHospital = async (req, res) => {
+    try {
+        // Aggregate query to get beds grouped by hospital
+        const beds = await Bed.aggregate([
+            {
+                $lookup: {
+                    from: 'hospitals',  // Reference to the "hospitals" collection
+                    localField: 'hospital',  // Field in the 'Beds' collection
+                    foreignField: '_id',  // Reference field in the 'hospitals' collection
+                    as: 'hospitalDetails',  // Name of the array that will hold the hospital data
+                }
+            },
+            {
+                $unwind: '$hospitalDetails',  // Unwind the 'hospitalDetails' array
+            },
+            {
+                $group: {
+                    _id: '$hospital',  // Group by hospital ID
+                    hospitalName: { $first: '$hospitalDetails.name' },  // Get the hospital name
+                    hospitalProfilePhoto: { $first: '$hospitalDetails.profilePhoto' },  // Get the hospital profile photo
+                    beds: {
+                        $push: {
+                            bedType: '$bedType',
+                            totalBeds: '$totalBeds',
+                            availableBeds: '$availableBeds',
+                            occupiedBeds: '$occupiedBeds',
+                            pricePerDay: '$pricePerDay',
+                        }
+                    }
+                }
+            },
+            {
+                $project: {
+                    hospitalName: 1,  // Include hospital name
+                    hospitalProfilePhoto: 1,  // Include hospital profile photo
+                    beds: 1  // Include the beds array
+                }
+            }
+        ]);
+
+        // Debugging: Check if we got the desired result
+        console.log("Beds grouped by hospital:", beds);
+
+        // Send the results as a JSON response
+        if (beds.length === 0) {
+            return res.status(404).json({ message: "No bed details found" });
+        }
+
+        res.json(beds);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error fetching bed details grouped by hospital', error: error.message });
+    }
+};
+

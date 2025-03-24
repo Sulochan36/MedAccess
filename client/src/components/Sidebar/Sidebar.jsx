@@ -20,6 +20,7 @@ const Sidebar = () => {
             <div className={`sidebar ${isOpen ? 'open' : ''}`}>
                 <h2 className="sidebar-title">Health Dashboard</h2>
                 <Link to="/dashboard" className="sidebar-link"><FaHome className="sidebar-icon" />Dashboard</Link>
+                <Link to="/dashboard/editprofile" className="sidebar-link"><MdBloodtype className="sidebar-icon" />Edit Profile</Link>
                 <Link to="/dashboard/bloodbank" className="sidebar-link"><MdBloodtype className="sidebar-icon" />Blood Bank</Link>
                 <Link to="/dashboard/doctors" className="sidebar-link"><FaUserDoctor className="sidebar-icon" />Manage Doctors</Link>
                 <Link to="/dashboard/beds" className="sidebar-link"><FaBed className="sidebar-icon" />Beds</Link>

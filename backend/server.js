@@ -20,7 +20,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: 'http://localhost:5174',  // Allow requests from your frontend (Vite)
+    origin: 'http://localhost:5173',  // Allow requests from your frontend (Vite)
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));

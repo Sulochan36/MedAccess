@@ -93,3 +93,22 @@ export const deleteMedicine = async (req, res) => {
         res.status(500).json({ success: false, message: "Error deleting medicine", error: error.message });
     }
 };
+
+
+export const searchMedicines = async (req, res) => {
+    try {
+        const { query } = req.query; // Get search term from query params
+
+        const medicines = await Pharmacy.find({
+            $or: [
+                { name: { $regex: query, $options: 'i' } }, // Search by name (case-insensitive)
+                { category: { $regex: query, $options: 'i' } }, // Search by category
+                { expiryDate: { $regex: query, $options: 'i' } } // Search by expiryDate
+            ]
+        });
+
+        res.status(200).json(medicines);
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching medicines', error });
+    }
+};

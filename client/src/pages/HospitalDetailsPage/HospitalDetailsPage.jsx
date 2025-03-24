@@ -244,11 +244,11 @@ const HospitalDetailsPage = () => {
                     <section className="info-section">
                         <h2>About Us</h2>
                         <div className="info-section__content">
-                            <p>{hospital.hospitalName} is a leading healthcare institution dedicated to providing high-quality medical care with compassion and expertise. Equipped with state-of-the-art technology and a team of experienced doctors, nurses, and specialists, we offer a wide range of medical services, including cardiology, orthopedics, neurology, oncology, and maternity care. Our hospital operates 24/7, ensuring that patients receive immediate and effective treatment, whether for routine check-ups, emergency care, or specialized procedures.
-
-With a patient-first approach, we focus on personalized treatment, affordability, and accessibility, making quality healthcare available to all. Our commitment to excellence extends beyond treatment to research, innovation, and community health initiatives. At [Hospital Name], we strive to create a comfortable and safe environment where every patient receives the best possible care for a healthier future.</p>
+                            {hospital.about}
                         </div>
                     </section>
+
+
 
                     <section className="info-section">
                         <h2>Location & Address</h2>
@@ -261,6 +261,26 @@ With a patient-first approach, we focus on personalized treatment, affordability
                                     {hospital.address.zipCode}
                                 </address>
                             </div>
+                        </div>
+                    </section>
+
+                    {/* Doctors Section */}
+                    <section className="info-section">
+                        <h2>Our Doctors</h2>
+                        <div>
+                            {hospital.doctors && hospital.doctors.length > 0 ? (
+                                <ul>
+                                    {hospital.doctors.map((doctor) => (
+                                        <li key={doctor._id}>
+                                            <h3>{doctor.fullName}</h3>
+                                            <p>{doctor.specialization}</p>
+                                            <p>{doctor.contactNumber}</p>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <p>No doctors available at the moment.</p>
+                            )}
                         </div>
                     </section>
                 </div>

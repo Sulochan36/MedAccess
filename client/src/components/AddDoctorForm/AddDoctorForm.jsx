@@ -1,12 +1,9 @@
-// AddDoctorForm.jsx
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';  // Make sure to install axios
 import './AddDoctorForm.css';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const AddDoctorForm = () => {
-
-    const location = useLocation();  // Get the location object
+    const location = useLocation();
     const navigate = useNavigate();
 
     const [errors, setErrors] = useState({});
@@ -14,7 +11,7 @@ const AddDoctorForm = () => {
 
     const [formData, setFormData] = useState({
         fullName: '',
-        profilePicture: null,
+        profilePicture: null,  // Profile picture will be stored as a Base64 string
         specialization: '',
         experience: '',
         qualification: '',
@@ -29,27 +26,40 @@ const AddDoctorForm = () => {
 
     useEffect(() => {
         if (editingHdoctor) {
-                setFormData({
-                    fullName: editingHdoctor.fullName,
-                    profilePicture: editingHdoctor.profilePicture,
-                    specialization: editingHdoctor.specialization,
-                    experience: editingHdoctor.experience,
-                    qualification: editingHdoctor.qualification,
-                    contactNumber: editingHdoctor.contactNumber,
-                    email: editingHdoctor.email,
-                    visitingHours: editingHdoctor.visitingHours,
-                    fee: editingHdoctor.fee,
-                    availabilityStatus: editingHdoctor.availabilityStatus
-                });
-            }
+            setFormData({
+                fullName: editingHdoctor.fullName,
+                profilePicture: editingHdoctor.profilePicture,
+                specialization: editingHdoctor.specialization,
+                experience: editingHdoctor.experience,
+                qualification: editingHdoctor.qualification,
+                contactNumber: editingHdoctor.contactNumber,
+                email: editingHdoctor.email,
+                visitingHours: editingHdoctor.visitingHours,
+                fee: editingHdoctor.fee,
+                availabilityStatus: editingHdoctor.availabilityStatus
+            });
+        }
     }, [editingHdoctor]);
 
-    
+    // Handle file change for profile picture
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setFormData(prev => ({
+                    ...prev,
+                    profilePicture: reader.result,  // Store the Base64 encoded string
+                }));
+            };
+            reader.readAsDataURL(file);  // Convert to Base64
+        }
+    };
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
         if (type === 'file') {
-            setFormData((prevData) => ({ ...prevData, [name]: files[0] }));
+            handleFileChange(e);  // Handle file change
         } else {
             setFormData((prevData) => ({ ...prevData, [name]: value }));
         }
@@ -63,8 +73,8 @@ const AddDoctorForm = () => {
         if (!formData.qualification) newErrors.qualification = "Qualification is required";
         if (!formData.contactNumber || formData.contactNumber.length !== 10) newErrors.contactNumber = "Contact Number must be 10 digits";
         if (!formData.email) newErrors.email = "Email is required";
-        if (!formData.visitingHours) newErrors.visitingHours = "Visitng time is required";
-        if (!formData.fee) newErrors.fee = "Fees is required";
+        if (!formData.visitingHours) newErrors.visitingHours = "Visiting time is required";
+        if (!formData.fee) newErrors.fee = "Fee is required";
         if (!formData.availabilityStatus) newErrors.availabilityStatus = "Availability status is required";
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -75,12 +85,16 @@ const AddDoctorForm = () => {
 
         if (validateForm()) {
             setLoading(true);
-            const formDataToSend = new FormData();
+            const doctorFormData = { ...formData };
 
-            Object.keys(formData).forEach((key) => {
-                console.log(key, formData[key]);
-                formDataToSend.append(key, formData[key]);
-            });
+            // Check if the profile picture was updated
+            if (formData.profilePicture && formData.profilePicture.startsWith('data:image')) {
+                // If it's a new image (Base64), send it as is
+                doctorFormData.profilePicture = formData.profilePicture;
+            } else if (!formData.profilePicture) {
+                // If there's no new profile picture, keep the existing one (URL or null)
+                doctorFormData.profilePicture = editingHdoctor ? editingHdoctor.profilePicture : null;
+            }
 
             const token = localStorage.getItem('token');
             if (!token) {
@@ -88,97 +102,153 @@ const AddDoctorForm = () => {
                 return;
             }
 
-            const apiUrl = editingHdoctor ? `http://localhost:5000/api/hospitaldoctors/${editingHdoctor._id}` : 'http://localhost:5000/api/hospitaldoctors/addhdoctor';
-            const method = editingHdoctor ? 'put' : 'post';
+            const apiUrl = editingHdoctor
+                ? `http://localhost:5000/api/hospitaldoctors/${editingHdoctor._id}`  // Use PUT for update
+                : 'http://localhost:5000/api/hospitaldoctors/addhdoctor';  // Use POST for adding
 
-            axios[method](apiUrl, formDataToSend, {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                }
-            })
-                .then(response => {
-                    alert(editingHdoctor ? 'Doctor details updated' : 'Doctor details added');
-                    navigate('/dashboard/doctors');
-                })
-                .catch(error => {
-                    console.error("Error saving doctor details:", error);
-                    alert('An error occurred while saving doctor details.');
+            const method = editingHdoctor ? 'PUT' : 'POST';
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: method,  // Use the correct HTTP method (PUT for updates, POST for adding)
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                    },
+                    body: JSON.stringify(doctorFormData),  // Send the formData (including profile picture)
                 });
+
+                const result = await response.json();
+                if (!response.ok) {
+                    // If response is not ok, handle error
+                    throw new Error(result.message || 'An error occurred while saving doctor details');
+                }
+
+                alert(editingHdoctor ? 'Doctor details updated' : 'Doctor details added');
+                navigate('/dashboard/doctors');
+            } catch (error) {
+                console.error("Error saving doctor details:", error);
+                alert(error.message || 'An unexpected error occurred');
+            } finally {
+                setLoading(false);  // Set loading to false once the operation completes
+            }
         }
     };
 
+
+
     return (
         <div>
-            <h2>{editingHdoctor?"Edit Doctor Details" : "Add Doctor Details"}</h2>
+            <h2>{editingHdoctor ? "Edit Doctor Details" : "Add Doctor Details"}</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="fullName">Full Name (Required)</label>
-                    <input type="text" id="fullName" name="fullName" value={formData.fullName} onChange={handleChange} />
-                    {errors.fullName && <p style={{ color: 'red' }}>{errors.fullName}</p>}
+                    <label>Full Name</label>
+                    <input
+                        type="text"
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                    />
+                    {errors.fullName && <p className="error">{errors.fullName}</p>}
                 </div>
-
                 <div>
-                    <label htmlFor="profilePicture">Profile Picture (Optional)</label>
-                    <input type="file" id="profilePicture" name="profilePicture" accept="image/png, image/jpeg" onChange={handleChange} />
+                    <label>Specialization</label>
+                    <input
+                        type="text"
+                        name="specialization"
+                        value={formData.specialization}
+                        onChange={handleChange}
+                    />
+                    {errors.specialization && <p className="error">{errors.specialization}</p>}
                 </div>
-
                 <div>
-                    <label htmlFor="specialization">Specialization (Required)</label>
-                    <input type="text" id="specialization" name="specialization" value={formData.specialization} onChange={handleChange} />
-                    {errors.specialization && <p style={{ color: 'red' }}>{errors.specialization}</p>}
+                    <label>Experience (in years)</label>
+                    <input
+                        type="number"
+                        name="experience"
+                        value={formData.experience}
+                        onChange={handleChange}
+                    />
+                    {errors.experience && <p className="error">{errors.experience}</p>}
                 </div>
-
                 <div>
-                    <label htmlFor="experience">Experience (Years) (Required)</label>
-                    <input type="number" id="experience" name="experience" value={formData.experience} onChange={handleChange} />
-                    {errors.experience && <p style={{ color: 'red' }}>{errors.experience}</p>}
+                    <label>Qualification</label>
+                    <input
+                        type="text"
+                        name="qualification"
+                        value={formData.qualification}
+                        onChange={handleChange}
+                    />
+                    {errors.qualification && <p className="error">{errors.qualification}</p>}
                 </div>
-
                 <div>
-                    <label htmlFor="qualification">Qualification (Required)</label>
-                    <input type="text" id="qualification" name="qualification" value={formData.qualification} onChange={handleChange} />
-                    {errors.qualification && <p style={{ color: 'red' }}>{errors.qualification}</p>}
+                    <label>Contact Number</label>
+                    <input
+                        type="text"
+                        name="contactNumber"
+                        value={formData.contactNumber}
+                        onChange={handleChange}
+                    />
+                    {errors.contactNumber && <p className="error">{errors.contactNumber}</p>}
                 </div>
-
                 <div>
-                    <label htmlFor="contactNumber">Contact Number (Required)</label>
-                    <input type="text" id="contactNumber" name="contactNumber" value={formData.contactNumber} onChange={handleChange} />
-                    {errors.contactNumber && <p style={{ color: 'red' }}>{errors.contactNumber}</p>}
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                    />
+                    {errors.email && <p className="error">{errors.email}</p>}
                 </div>
-
                 <div>
-                    <label htmlFor="email">Email (Required)</label>
-                    <input type="text" id="email" name="email" value={formData.email} onChange={handleChange} />
-                    {errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
+                    <label>Visiting Hours</label>
+                    <input
+                        type="text"
+                        name="visitingHours"
+                        value={formData.visitingHours}
+                        onChange={handleChange}
+                    />
+                    {errors.visitingHours && <p className="error">{errors.visitingHours}</p>}
                 </div>
-
                 <div>
-                    <label htmlFor="visitingHours">Visiting Hours</label>
-                    <input type="text" id="visitingHours" name="visitingHours" value={formData.visitingHours} onChange={handleChange} />
-                    {errors.visitingHours && <p style={{ color: 'red' }}>{errors.visitingHours}</p>}
+                    <label>Fee</label>
+                    <input
+                        type="text"
+                        name="fee"
+                        value={formData.fee}
+                        onChange={handleChange}
+                    />
+                    {errors.fee && <p className="error">{errors.fee}</p>}
                 </div>
-
                 <div>
-                    <label htmlFor="fee">Fees</label>
-                    <input type="text" id="fee" name="fee" value={formData.fee} onChange={handleChange} />
-                    {errors.fee && <p style={{ color: 'red' }}>{errors.fee}</p>}
+                    <label>Availability Status</label>
+                    <input
+                        type="text"
+                        name="availabilityStatus"
+                        value={formData.availabilityStatus}
+                        onChange={handleChange}
+                    />
+                    {errors.availabilityStatus && <p className="error">{errors.availabilityStatus}</p>}
                 </div>
-
                 <div>
-                    <label htmlFor="availabilityStatus">Availability Status (Required)</label>
-                    <select id="availabilityStatus" name="availabilityStatus" value={formData.availabilityStatus} onChange={handleChange}>
-                        <option value="">Select Availability Status</option>
-                        <option value="Available">Available</option>
-                        <option value="Unavailable">Unavailable</option>
-                    </select>
-                    {errors.availabilityStatus && <p style={{ color: 'red' }}>{errors.availabilityStatus}</p>}
+                    <label>Profile Picture</label>
+                    <input
+                        type="file"
+                        name="profilePicture"
+                        accept="image/*"
+                        onChange={handleChange}
+                    />
+                    {formData.profilePicture && (
+                        <img
+                            src={formData.profilePicture}
+                            alt="Profile Preview"
+                            style={{ width: '100px', height: '100px' }}
+                        />
+                    )}
                 </div>
-
-                <button type="submit" disabled={loading}>{loading
-                    ? (editingHdoctor ? "Updating..." : "Adding...")
-                    : (editingHdoctor ? "Update" : "Add")
-                }
-                    Doctor Details
+                <button type="submit" disabled={loading}>
+                    {loading ? "Saving..." : "Submit"}
                 </button>
             </form>
         </div>

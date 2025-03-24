@@ -1,0 +1,134 @@
+/* Container for the Edit Profile Page */
+.edit-profile-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Header Style */
+.edit-profile-container h2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Error Message */
+.error {
+    color: #e74c3c;
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Label Style */
+label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Input and Textarea Styles */
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="file"],
+textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="file"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+/* Textarea */
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Image Preview */
+.image-preview {
+    max-width: 200px;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+/* Button Style */
+.submit-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Input Wrapper to ensure spacing */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Flexbox for the Address Fields */
+.form-group input {
+    margin-bottom: 5px;
+}
+
+/* Profile Photo input section */
+.profile-photo-upload {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+input[type="file"] {
+    padding: 10px;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .edit-profile-container {
+        padding: 15px;
+    }
+
+    .form-group {
+        flex-direction: column;
+    }
+
+    .submit-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
